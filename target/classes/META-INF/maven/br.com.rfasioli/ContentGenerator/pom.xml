@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>br.com.rfasioli</groupId>
+	<artifactId>ContentGenerator</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>ContentGenerator</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+        <openhtml.version>0.0.1-RC12</openhtml.version>
+	</properties>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.2.RELEASE</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- OPEN HTML TO PDF -->
+		<dependency>
+			<!-- ALWAYS required. -->
+          	<groupId>com.openhtmltopdf</groupId>
+          	<artifactId>openhtmltopdf-core</artifactId>
+          	<version>${openhtml.version}</version>
+      	</dependency>
+     	<dependency>
+          	<!-- Required for PDF output. -->
+          	<groupId>com.openhtmltopdf</groupId>
+          	<artifactId>openhtmltopdf-pdfbox</artifactId>
+          	<version>${openhtml.version}</version>
+      	</dependency>
+     	<dependency>
+          	<!-- Required for image output only. -->      
+         	<groupId>com.openhtmltopdf</groupId>
+          	<artifactId>openhtmltopdf-java2d</artifactId>
+          	<version>${openhtml.version}</version>
+      	</dependency>
+     	<dependency>
+          	<!-- Optional, leave out if you do not need right-to-left or bi-directional text support. -->
+          	<groupId>com.openhtmltopdf</groupId>
+          	<artifactId>openhtmltopdf-rtl-support</artifactId>
+          	<version>${openhtml.version}</version>
+      	</dependency>
+     	<dependency>
+        	<!-- Optional, leave out if you do not need HTML5 parsing support. -->
+          	<groupId>com.openhtmltopdf</groupId>
+          	<artifactId>openhtmltopdf-jsoup-dom-converter</artifactId>
+          	<version>${openhtml.version}</version>
+      	</dependency>
+
+      	<dependency>
+    		<groupId>commons-codec</groupId>
+    		<artifactId>commons-codec</artifactId>
+		</dependency>
+
+	</dependencies>
+</project>
