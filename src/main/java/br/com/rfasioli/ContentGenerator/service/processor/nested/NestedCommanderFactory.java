@@ -9,7 +9,7 @@ public class NestedCommanderFactory {
 		NestedCommander obj = null;
 		
 		//TODO - usar reflection
-//		Reflections reflections = new Reflections("br.com.isban.e8.service.reportgenerator.processor.directive");    
+//		Reflections reflections = new Reflections("br.com.rfasioli.ContentGenerator.service.processor.nested");    
 //		Set<Class<? extends MyInterface>> classes = reflections.getSubTypesOf(MyInterface.class);
 		
 		if (action == null || action.isEmpty() || action.toUpperCase().equals("APPEND")) {
