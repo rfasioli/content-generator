@@ -8,7 +8,7 @@ public class DirectiveCommanderFactory {
 		DirectiveCommander obj = null;
 		
 		//TODO - usar reflection
-//		Reflections reflections = new Reflections("br.com.isban.e8.service.reportgenerator.processor.directive");    
+//		Reflections reflections = new Reflections("br.com.rfasioli.ContentGenerator.service.processor.directive");    
 //		Set<Class<? extends MyInterface>> classes = reflections.getSubTypesOf(MyInterface.class);
 		
 		if (directive.toUpperCase().equals("IF")) {
