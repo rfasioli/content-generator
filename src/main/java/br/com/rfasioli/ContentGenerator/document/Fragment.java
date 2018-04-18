@@ -1,5 +1,7 @@
 package br.com.rfasioli.ContentGenerator.document;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,17 +18,18 @@ public class Fragment {
 
 	private String description;
 	private String content;
-
+	private List<String> tags; 
 
 	public Fragment() {
 		super();
 	}
 
-	public Fragment(String id, String description, String content) {
+	public Fragment(String id, String description, String content, List<String> tags) {
 		super();
 		this.id = id;
 		this.description = description;
 		this.content = content;
+		this.tags = tags;
 	}
 
 	public String getId() {
@@ -48,9 +51,17 @@ public class Fragment {
 		this.content = content;
 	}
 
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+
 	@Override
 	public String toString() {
-		return "Fragment [id=" + id + ", description=" + description + ", content=" + content + "]";
+		return "Fragment [id=" + id + ", description=" + description + ", content=" + content + ", tags=" + tags + "]";
 	}
 
 }

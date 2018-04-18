@@ -25,6 +25,10 @@ import br.com.rfasioli.ContentGenerator.service.processor.nested.NestedCommander
 import br.com.rfasioli.ContentGenerator.service.processor.nested.NestedCommanderFactory;
 import br.com.rfasioli.ContentGenerator.util.pdfGenerator;
 
+/**
+ * @author rfasioli
+ *
+ */
 @Service
 public class ReportGeneratorService {
 

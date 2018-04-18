@@ -6,6 +6,10 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * @author rfasioli
+ *
+ */
 @Document(collection = "template")
 public class Template extends TemplateBase {
 
@@ -23,16 +27,18 @@ public class Template extends TemplateBase {
 			String description,
 			Rule[] rules,
 			String[] fragments,
-			List<TemplateNested> nested) {
-		super(description, rules, fragments);
+			List<TemplateNested> nested,
+			List<String> tags) {
+		super(description, rules, fragments, tags);
 		this.nested = nested;
 	}
 
 	public Template(
 			String description, 
 			Rule[] rules, 
-			String[] fragments) {
-		super(description, rules, fragments);
+			String[] fragments,
+			List<String> tags) {
+		super(description, rules, fragments, tags);
 	}
 
 	public String getId() {

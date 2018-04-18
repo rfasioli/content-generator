@@ -2,6 +2,10 @@ package br.com.rfasioli.ContentGenerator.document;
 
 import java.util.Arrays;
 
+/**
+ * @author rfasioli
+ *
+ */
 public class Rule {
 	private String description;
 	private Query[] queries;  
