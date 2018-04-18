@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.rfasioli.ContentGenerator.document.Fragment;
 import br.com.rfasioli.ContentGenerator.repository.FragmentRepository;
 
+/**
+ * @author rfasioli
+ *
+ */
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping(path = "/reportgenerator/fragment", produces="application/json")

@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rfasioli.ContentGenerator.service.ReportGeneratorService;
 
+/**
+ * @author rfasioli
+ *
+ */
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping(path = "/reportgenerator", produces="application/json")

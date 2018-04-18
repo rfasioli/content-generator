@@ -6,6 +6,10 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import br.com.rfasioli.ContentGenerator.document.Template;
 
+/**
+ * @author rfasioli
+ *
+ */
 public interface TemplateRepository 
 	extends MongoRepository<Template, String> 
 {

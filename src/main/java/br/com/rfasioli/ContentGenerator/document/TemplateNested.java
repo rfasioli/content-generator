@@ -5,6 +5,10 @@ import java.util.List;
 
 import javax.validation.constraints.Null;
 
+/**
+ * @author rfasioli
+ *
+ */
 public class TemplateNested extends TemplateBase {
 
 	private String action;
@@ -22,8 +26,9 @@ public class TemplateNested extends TemplateBase {
 			String[] fragments,
 			String action,
 			String reference,
-			List<?> nested) {
-		super(description, rules, fragments);
+			List<?> nested,
+			List<String> tags) {
+		super(description, rules, fragments, tags);
 		this.action = action;
 		this.reference = reference;
 		this.nested = nested;
@@ -32,8 +37,9 @@ public class TemplateNested extends TemplateBase {
 	public TemplateNested(
 			String description, 
 			Rule[] rules, 
-			String[] fragments) {
-		super(description, rules, fragments);
+			String[] fragments,
+			List<String> tags) {
+		super(description, rules, fragments, tags);
 	}
 
 	public String getAction() {

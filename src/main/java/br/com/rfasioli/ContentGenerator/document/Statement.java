@@ -2,6 +2,10 @@ package br.com.rfasioli.ContentGenerator.document;
 
 import java.util.Arrays;
 
+/**
+ * @author rfasioli
+ *
+ */
 public class Statement {
 	private String field;
 	private String operator;
