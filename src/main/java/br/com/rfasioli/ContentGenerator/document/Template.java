@@ -24,21 +24,23 @@ public class Template extends TemplateBase {
 	}
 
 	public Template(
+			String contentId,
 			String description,
 			Rule[] rules,
 			String[] fragments,
 			List<TemplateNested> nested,
 			List<String> tags) {
-		super(description, rules, fragments, tags);
+		super(contentId, description, rules, fragments, tags);
 		this.nested = nested;
 	}
 
 	public Template(
+			String contentId,
 			String description, 
 			Rule[] rules, 
 			String[] fragments,
 			List<String> tags) {
-		super(description, rules, fragments, tags);
+		super(contentId, description, rules, fragments, tags);
 	}
 
 	public String getId() {

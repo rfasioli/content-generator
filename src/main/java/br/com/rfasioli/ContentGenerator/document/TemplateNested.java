@@ -21,6 +21,7 @@ public class TemplateNested extends TemplateBase {
 	}
 
 	public TemplateNested(
+			String contentId,
 			String description,
 			Rule[] rules,
 			String[] fragments,
@@ -28,18 +29,19 @@ public class TemplateNested extends TemplateBase {
 			String reference,
 			List<?> nested,
 			List<String> tags) {
-		super(description, rules, fragments, tags);
+		super(contentId, description, rules, fragments, tags);
 		this.action = action;
 		this.reference = reference;
 		this.nested = nested;
 	}
 	
 	public TemplateNested(
+			String contentId,
 			String description, 
 			Rule[] rules, 
 			String[] fragments,
 			List<String> tags) {
-		super(description, rules, fragments, tags);
+		super(contentId, description, rules, fragments, tags);
 	}
 
 	public String getAction() {

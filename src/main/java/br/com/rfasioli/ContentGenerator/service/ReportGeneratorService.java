@@ -42,18 +42,18 @@ public class ReportGeneratorService {
 	
 	/**
 	 * Gera relatório
+	 * @param contentId 
 	 * @param request dados da requisição para gerar o relatório
 	 * @return
 	 */
-	public String generateReport(String request) {
+	public String generateReport(String contentId, String request) {
 		Map<String, String> docTemplate = new LinkedHashMap<>();
 		Iterable<Template> templates = null;
 
 		String result = null;
 		
 		try {
-			templates = templateRepo.findByRulesQueriesStatementFieldAndRulesQueriesStatementOperatorAndRulesQueriesStatementValues
-							("reportId", "eq", getValueFromJsonString(request, "reportId"));
+			templates = templateRepo.findByContentId(contentId);
 
 			for (Template template : templates) {
 				processTemplate(template, request, docTemplate);
@@ -69,7 +69,7 @@ public class ReportGeneratorService {
 		return result;
 	}
 	
-	public byte[] generatePdfReport(String request) {
+	public byte[] generatePdfReport(String contentId, String request) {
 		byte[] result = null;
 		String xHtmlDocument = "";
 		
@@ -78,7 +78,7 @@ public class ReportGeneratorService {
 					"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">" + 
 					"<html xmlns=\"http://www.w3.org/1999/xhtml\">" +
 						"<body>" +
-							generateReport(request) +
+							generateReport(contentId, request) +
 						"</body>" +
 					"</html>";
 			result = pdfGenerator.fromXHtmlContentToBase64(xHtmlDocument);

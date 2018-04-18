@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class TemplateBase {
 
+	protected String contentId;
 	protected String description;
 	protected Rule[] rules;
 	protected String[] fragments;
@@ -19,16 +20,27 @@ public class TemplateBase {
 	}
 
 	public TemplateBase(
+			String contentId,
 			String description,
 			Rule[] rules,
 			String[] fragments,
 			List<String> tags)
 	{
 		super();
+		this.contentId = contentId;
 		this.description = description;
 		this.rules = rules;
 		this.fragments = fragments;
 		this.tags = tags;
+	}
+
+	
+	public String getContentId() {
+		return contentId;
+	}
+
+	public void setContentId(String contentId) {
+		this.contentId = contentId;
 	}
 
 	public String getDescription() {
@@ -65,8 +77,8 @@ public class TemplateBase {
 
 	@Override
 	public String toString() {
-		return "TemplateBase [description=" + description + ", rules=" + Arrays.toString(rules) + ", fragments="
-				+ Arrays.toString(fragments) + ", tags=" + tags + "]";
+		return "TemplateBase [contentId=" + contentId + ", description=" + description + ", rules="
+				+ Arrays.toString(rules) + ", fragments=" + Arrays.toString(fragments) + ", tags=" + tags + "]";
 	}
 	
 }
