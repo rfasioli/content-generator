@@ -6,6 +6,9 @@ import java.util.Map;
 import br.com.rfasioli.ContentGenerator.document.Fragment;
 import br.com.rfasioli.ContentGenerator.service.processor.nested.NestedCommander;
 
+/**
+ * @author rodrigo fasioli
+ */
 public class ReplaceNestedCommanderImpl implements NestedCommander {
 
 	@Override

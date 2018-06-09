@@ -1,5 +1,9 @@
 package br.com.rfasioli.ContentGenerator.service.processor;
 
+/**
+ * @author rodrigo fasioli
+ *
+ */
 public class DocumentFragment {
 	private int start;
 	private int end;

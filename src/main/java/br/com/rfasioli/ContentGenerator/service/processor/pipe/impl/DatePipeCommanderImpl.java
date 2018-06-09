@@ -6,6 +6,9 @@ import java.util.Date;
 
 import br.com.rfasioli.ContentGenerator.service.processor.pipe.PipeCommander;
 
+/**
+ * @author guilherme maegava
+ */
 public class DatePipeCommanderImpl implements PipeCommander {
 
 	@Override

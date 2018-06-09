@@ -4,6 +4,9 @@ import java.util.Map;
 
 import br.com.rfasioli.ContentGenerator.document.Fragment;
 
+/**
+ * @author rodrigo fasioli
+ */
 public interface NestedCommander {
 	public void execute(
 			Fragment fragment, 

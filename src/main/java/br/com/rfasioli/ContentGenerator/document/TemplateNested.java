@@ -6,8 +6,7 @@ import java.util.List;
 import javax.validation.constraints.Null;
 
 /**
- * @author rfasioli
- *
+ * @author Rodrigo Fasioli
  */
 public class TemplateNested extends TemplateBase {
 
