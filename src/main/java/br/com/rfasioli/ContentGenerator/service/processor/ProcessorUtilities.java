@@ -29,7 +29,7 @@ public class ProcessorUtilities {
 	    Matcher matcher = pattern.matcher(source);
 	    while (matcher.find()) {
 	        source = source.replaceAll(matcher.group(), getValueFromJsonString(obj, matcher.group(1)));
-		    System.out.println("Processando: " + source);
+		    logger.debug("Processando: " + source);
 	    }
 	    return source;
 	}
@@ -42,20 +42,28 @@ public class ProcessorUtilities {
 	 */
 	public static String getValueFromJsonString(JSONObject json, String field) {
 		String value = "";
+		if (field == null) 
+			return value;
+		
 		String[] fields = field.trim().split("\\.");
+		
 		for (int i = 0; i < fields.length; i++) {
-			if (json == null) { break; }
+			if (json == null) 
+				break;
+			
 			try {
 				json =  json.getJSONObject(fields[i].trim());
 			} catch (JSONException ex) {
-				logger.debug("Erro extraindo o node como um objecto, tentará extrair como valor.", ex);
+				logger.debug("Erro extraindo o node como um objecto, tentará extrair como valor.");
 				try {
 					value = json.get(fields[i]).toString();
 				} catch (JSONException e) {
-					logger.warn("Erro extraindo o node como um valor.", ex);
+					logger.warn(String.format("Erro extraindo o node como um valor. field[%s] json[%s]", field, json.toString()));
+					break;
 				}        	
 			}
 		}
+		
 	    return value;
 	}
 
@@ -67,6 +75,10 @@ public class ProcessorUtilities {
 	 */
 	public static JSONArray getJsonArrayObj(JSONObject json, String field) {
 		JSONArray ret = null;
+
+		if (field == null) 
+			return ret;
+		
 		try {
 			String[] fields = field.trim().split("\\.");
 			if (fields.length > 1) {
@@ -78,7 +90,7 @@ public class ProcessorUtilities {
 				ret = json.getJSONArray(fields[0]);
 		}
 		catch (JSONException ex) {
-			logger.warn("Erro obtendo node como um array.", ex);
+			logger.warn(String.format("Erro obtendo node como um array. field[%s] json[%s]", field, json.toString()));
 		}
 		return ret;
 	}
