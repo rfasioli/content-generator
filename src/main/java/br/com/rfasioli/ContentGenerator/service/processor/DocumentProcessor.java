@@ -12,7 +12,7 @@ import br.com.rfasioli.ContentGenerator.service.processor.pipe.PipeCommander;
 import br.com.rfasioli.ContentGenerator.service.processor.pipe.PipeCommanderFactory;
 
 /**
- * @author x109662
+ * @author Rodrigo Fasioli
  *
  */
 public class DocumentProcessor {

@@ -2,6 +2,9 @@ package br.com.rfasioli.ContentGenerator.service.processor.pipe.impl;
 
 import br.com.rfasioli.ContentGenerator.service.processor.pipe.PipeCommander;
 
+/**
+ * @author guilherme maegava
+ */
 public class MonToDayPipeCommanderImpl implements PipeCommander {
 	@Override
 	public String execute(String input) {

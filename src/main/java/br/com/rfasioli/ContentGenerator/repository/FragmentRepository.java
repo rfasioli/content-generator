@@ -7,9 +7,8 @@ import br.com.rfasioli.ContentGenerator.document.Fragment;
 
 /**
  * @author rfasioli
- *
  */
-@RepositoryRestResource(collectionResourceRel = "fragment", path = "fragment")
+@RepositoryRestResource(collectionResourceRel = "fragment", path = "fragments")
 public interface FragmentRepository 
 	extends MongoRepository<Fragment, String> 
 {

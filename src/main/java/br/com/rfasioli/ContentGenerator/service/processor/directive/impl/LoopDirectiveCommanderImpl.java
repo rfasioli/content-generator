@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import br.com.rfasioli.ContentGenerator.service.processor.ProcessorUtilities;
 import br.com.rfasioli.ContentGenerator.service.processor.directive.DirectiveCommander;
 
+/**
+ * @author rodrigo fasioli
+ */
 public class LoopDirectiveCommanderImpl implements DirectiveCommander {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoopDirectiveCommanderImpl.class);
