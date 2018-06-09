@@ -30,9 +30,9 @@ import br.com.rfasioli.ContentGenerator.util.pdfGenerator;
  *
  */
 @Service
-public class ReportGeneratorService {
+public class ContentGeneratorService {
 
-	private static final Logger logger = LoggerFactory.getLogger(ReportGeneratorService.class);
+	private static final Logger logger = LoggerFactory.getLogger(ContentGeneratorService.class);
 
 	@Autowired 
 	private TemplateRepository templateRepo;
@@ -268,7 +268,7 @@ public class ReportGeneratorService {
 		return stringBuilder;
 	}
 	
-	public ReportGeneratorService() {
+	public ContentGeneratorService() {
 		super();
 	}
 

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.rfasioli.ContentGenerator.service.ReportGeneratorService;
+import br.com.rfasioli.ContentGenerator.service.ContentGeneratorService;
 
 /**
  * @author rfasioli
@@ -15,11 +15,11 @@ import br.com.rfasioli.ContentGenerator.service.ReportGeneratorService;
  */
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping(path = "/reportgenerator", produces="application/json")
-public class ReportGeneratorController {
+@RequestMapping(path = "/contents", produces="application/json")
+public class ContentGeneratorController {
 	
 	@Autowired
-	private transient ReportGeneratorService rptGenSvc;
+	private transient ContentGeneratorService rptGenSvc;
 	
 	@RequestMapping(path = "", method = RequestMethod.POST)
 	public String generate(@RequestBody String request) {
@@ -33,7 +33,7 @@ public class ReportGeneratorController {
 		return response;
 	}
 
-	public ReportGeneratorController() {
+	public ContentGeneratorController() {
 		super();
 	}
 }

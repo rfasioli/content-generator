@@ -11,7 +11,7 @@ import br.com.rfasioli.ContentGenerator.document.Template;
  * @author rfasioli
  *
  */
-@RepositoryRestResource(collectionResourceRel = "template", path = "template")
+@RepositoryRestResource(collectionResourceRel = "template", path = "templates")
 public interface TemplateRepository 
 	extends MongoRepository<Template, String> 
 {

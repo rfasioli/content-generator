@@ -17,7 +17,6 @@ public class Template extends TemplateBase {
 	private String id;
 	
 	private List<TemplateNested> nested;
-//	private TemplateNested nested;
 	
 	public Template() { 
 		super(); 
