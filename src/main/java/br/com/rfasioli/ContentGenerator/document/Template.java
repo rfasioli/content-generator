@@ -7,8 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * @author rfasioli
- *
+ * @author Rodrigo Fasioli
  */
 @Document(collection = "template")
 public class Template extends TemplateBase {
@@ -17,7 +16,6 @@ public class Template extends TemplateBase {
 	private String id;
 	
 	private List<TemplateNested> nested;
-//	private TemplateNested nested;
 	
 	public Template() { 
 		super(); 

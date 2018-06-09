@@ -1,7 +1,7 @@
 package br.com.rfasioli.ContentGenerator.exception;
 
 /**
- * @author adurazzo
+ * @author Guilherme Maegava
  *
  */
 public class PdfGenerationException extends Exception {

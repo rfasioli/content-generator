@@ -4,10 +4,8 @@ import java.util.List;
 
 import javax.validation.constraints.Null;
 
-/***
- * 
- * @author rodrigofasioli
- *
+/**
+ * @author Rodrigo Fasioli
  */
 public class Query {
 	@Null

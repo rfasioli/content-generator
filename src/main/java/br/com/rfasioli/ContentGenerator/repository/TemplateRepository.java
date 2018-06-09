@@ -8,10 +8,9 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import br.com.rfasioli.ContentGenerator.document.Template;
 
 /**
- * @author rfasioli
- *
+ * @author Rodrigo Fasioli
  */
-@RepositoryRestResource(collectionResourceRel = "template", path = "template")
+@RepositoryRestResource(collectionResourceRel = "template", path = "templates")
 public interface TemplateRepository 
 	extends MongoRepository<Template, String> 
 {
