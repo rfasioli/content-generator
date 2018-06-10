@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -250,10 +251,10 @@ public class ContentGeneratorService {
 	private void applyFragments(String[] fragmentsTags, Map<String, String> docTemplate, String action, String reference) {
 		for (String tag : fragmentsTags) {
 			logger.debug("To be, apply " + action + " fragment " + tag + " on " + reference);
-			Fragment fragment = fragmentRepo.findOne(tag);
+			Optional<Fragment> fragment = fragmentRepo.findById(tag);
 			NestedCommander commander = NestedCommanderFactory.getNestedCommander(action);
 			if (commander != null) {
-				commander.execute(fragment, docTemplate, reference);
+				commander.execute(fragment.get(), docTemplate, reference);
 			}
 		}
 	}
