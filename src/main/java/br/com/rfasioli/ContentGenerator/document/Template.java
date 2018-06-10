@@ -1,42 +1,31 @@
 package br.com.rfasioli.ContentGenerator.document;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import br.com.rfasioli.ContentGenerator.dto.TemplateNestedDto;
 
 /**
  * @author Rodrigo Fasioli
  */
 @Document(collection = "template")
 public class Template extends TemplateBase {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String id;
 	
-	private List<TemplateNested> nested;
+	private List<TemplateNestedDto> nested = new ArrayList<>();
 	
 	public Template() { 
 		super(); 
 	}
 
-	public Template(
-			String description,
-			Rule[] rules,
-			String[] fragments,
-			List<TemplateNested> nested,
-			List<String> tags) {
-		super(description, rules, fragments, tags);
-		this.nested = nested;
-	}
-
-	public Template(
-			String description, 
-			Rule[] rules, 
-			String[] fragments,
-			List<String> tags) {
-		super(description, rules, fragments, tags);
+	public Template(String description) {
+		super(description);
 	}
 
 	public String getId() {
@@ -47,19 +36,43 @@ public class Template extends TemplateBase {
 		this.id = id;
 	}
 	
-	public List<TemplateNested> getNested() {
+	public List<TemplateNestedDto> getNested() {
 		return nested;
 	}
 
-	public void setNested(List<TemplateNested> nested) {
+	public void setNested(List<TemplateNestedDto> nested) {
 		this.nested = nested;
 	}
 
 	@Override
-	public String toString() {
-		return "Template [id=" + id + ", nested=" + nested + ", description=" + description + ", rules="
-				+ Arrays.toString(rules) + ", fragments=" + Arrays.toString(fragments) + "]";
-	}	
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Template other = (Template) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Template [id=" + id + ", nested=" + nested + ", description=" + description + ", rules=" + rules
+				+ ", tags=" + tags + ", fragments=" + fragments + "]";
+	}
 	
 }
