@@ -269,7 +269,7 @@ public class ContentGeneratorService {
 			stringBuilder += fragment.getValue();
 		}
 		
-		System.out.println(stringBuilder);
+		logger.debug(stringBuilder);
 		
 		return stringBuilder;
 	}

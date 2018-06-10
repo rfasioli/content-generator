@@ -3,6 +3,7 @@ package br.com.rfasioli.ContentGenerator.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,15 +27,15 @@ public class ContentGeneratorController {
 	private transient ContentGeneratorService rptGenSvc;
 	
 	@RequestMapping(path = "", method = RequestMethod.GET)
-	public String generate(@RequestParam String source) throws MissingParameterException {
+	public ResponseEntity<String> generate(@RequestParam String source) throws MissingParameterException {
 		String response = rptGenSvc.generateContent(source);
-		return response;
+		return ResponseEntity.ok().body(response);
 	}
 	
-	@RequestMapping(path = "pdf", method = RequestMethod.GET)
-	public byte[] generatePdf(@RequestParam String source) throws MissingParameterException, IOException, PdfGenerationException {
+	@RequestMapping(path = "/pdf", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> generatePdf(@RequestParam String source) throws MissingParameterException, IOException, PdfGenerationException {
 		byte[] response = rptGenSvc.generatePdfReport(source);
-		return response;
+		return ResponseEntity.ok().body(response);
 	}
 
 	public ContentGeneratorController() {
