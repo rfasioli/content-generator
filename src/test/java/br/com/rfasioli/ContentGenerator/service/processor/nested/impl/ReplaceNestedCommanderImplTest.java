@@ -21,7 +21,7 @@ public class ReplaceNestedCommanderImplTest {
 	public void setUp() {
 		this.nestedCommander = new ReplaceNestedCommanderImpl();
 		
-		this.fragment = new Fragment("10", "fragmento 10", "conteudo do fragmento 10", null);
+		this.fragment = new Fragment("10", "fragmento 10", "conteudo do fragmento 10");
 		
 		this.docTemplate = new LinkedHashMap<>();
 		this.docTemplate.put("1", "value");

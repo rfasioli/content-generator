@@ -1,7 +1,6 @@
 package br.com.rfasioli.ContentGenerator.service;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,14 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.rfasioli.ContentGenerator.document.Fragment;
-import br.com.rfasioli.ContentGenerator.document.Query;
-import br.com.rfasioli.ContentGenerator.document.Rule;
 import br.com.rfasioli.ContentGenerator.document.Template;
 import br.com.rfasioli.ContentGenerator.document.TemplateBase;
-import br.com.rfasioli.ContentGenerator.document.TemplateNested;
+import br.com.rfasioli.ContentGenerator.dto.QueryDto;
+import br.com.rfasioli.ContentGenerator.dto.RuleDto;
+import br.com.rfasioli.ContentGenerator.dto.TemplateNestedDto;
 import br.com.rfasioli.ContentGenerator.exception.MissingParameterException;
 import br.com.rfasioli.ContentGenerator.exception.PdfGenerationException;
-import br.com.rfasioli.ContentGenerator.repository.FragmentRepository;
 import br.com.rfasioli.ContentGenerator.repository.TemplateRepository;
 import br.com.rfasioli.ContentGenerator.service.processor.DocumentProcessor;
 import br.com.rfasioli.ContentGenerator.service.processor.nested.NestedCommander;
@@ -39,9 +37,6 @@ public class ContentGeneratorService {
 
 	@Autowired 
 	private TemplateRepository templateRepo;
-	
-	@Autowired
-	private FragmentRepository fragmentRepo;
 	
 	/**
 	 * Gera conteúdo conforme a requisição associada à parametrização. 
@@ -106,10 +101,10 @@ public class ContentGeneratorService {
 			TemplateBase template, 
 			String request,
 			Map<String, String> docTemplate) {
-		for (Rule rule : template.getRules()) {
+		for (RuleDto rule : template.getRules()) {
 			if (processRule(rule, request)) {
-				if (template instanceof TemplateNested) {
-					TemplateNested nested = (TemplateNested) template;
+				if (template instanceof TemplateNestedDto) {
+					TemplateNestedDto nested = (TemplateNestedDto) template;
 					applyFragments(template.getFragments(), docTemplate, nested.getAction(), nested.getReference());
 				}
 				else {
@@ -121,8 +116,8 @@ public class ContentGeneratorService {
 		List<?> nested = null;
 		if (template instanceof Template) {
 			nested = ((Template)template).getNested();
-		} else if (template instanceof TemplateNested) {
-			nested = ((TemplateNested)template).getNested();
+		} else if (template instanceof TemplateNestedDto) {
+			nested = ((TemplateNestedDto)template).getNested();
 		}
 		if (nested != null) {
 			for (Object object : nested) {
@@ -138,10 +133,10 @@ public class ContentGeneratorService {
 	 * @return Regra é valida ou não
 	 */
 	private boolean processRule(
-			Rule rule, 
+			RuleDto rule, 
 			String request) {
 		boolean result = false;
-		for (Query query : rule.getQueries()) {
+		for (QueryDto query : rule.getQueries()) {
 			boolean aux_result = processQuery(query, request);
 			String operator = query.getOperator();
 			result = processLogicalOperator(operator, result, aux_result);
@@ -165,10 +160,10 @@ public class ContentGeneratorService {
 				previousResult || result);		
 	}
 	
-	private boolean processQuery(Query query, String request) {
+	private boolean processQuery(QueryDto query, String request) {
 		String field = query.getStatement().getField();
 		String operator = query.getStatement().getOperator();
-		List<String> values = Arrays.asList(query.getStatement().getValues());
+		List<String> values = query.getStatement().getValues();
 		
 		String currentValue = getValueFromJsonString(request, field);
 		
@@ -247,15 +242,31 @@ public class ContentGeneratorService {
 	 * @param action
 	 * @param reference
 	 */
-	private void applyFragments(String[] fragmentsTags, Map<String, String> docTemplate, String action, String reference) {
-		for (String tag : fragmentsTags) {
-			logger.debug("To be, apply " + action + " fragment " + tag + " on " + reference);
-			Fragment fragment = fragmentRepo.findOne(tag);
-			NestedCommander commander = NestedCommanderFactory.getNestedCommander(action);
-			if (commander != null) {
-				commander.execute(fragment, docTemplate, reference);
-			}
-		}
+	private void applyFragments(List<Fragment> fragments, Map<String, String> docTemplate, String action, String reference) {
+		fragments.stream().allMatch(fragment -> applyFragment(fragment, docTemplate, action, reference));
+		
+//		for (Fragment fragment : fragments) {
+//			logger.debug("To be, apply " + action + " fragment " + fragment.getDescription() + " on " + reference);
+//			NestedCommander commander = NestedCommanderFactory.getNestedCommander(action);
+//			if (commander != null) {
+//				commander.execute(fragment, docTemplate, reference);
+//			}
+//		}
+	}
+	
+	/**
+	 * @param fragment
+	 * @param docTemplate
+	 * @param action
+	 * @param reference
+	 * @return
+	 */
+	private boolean applyFragment(Fragment fragment, Map<String, String> docTemplate, String action, String reference) {
+		NestedCommander commander = NestedCommanderFactory.getNestedCommander(action);
+		if (commander != null) {
+			commander.execute(fragment, docTemplate, reference);
+		}		
+		return true;
 	}
 
 	/**
@@ -277,6 +288,5 @@ public class ContentGeneratorService {
 	public ContentGeneratorService() {
 		super();
 	}
-
 
 }
