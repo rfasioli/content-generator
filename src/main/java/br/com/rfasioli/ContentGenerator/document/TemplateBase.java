@@ -1,33 +1,35 @@
 package br.com.rfasioli.ContentGenerator.document;
 
-import java.util.Arrays;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
+import br.com.rfasioli.ContentGenerator.dto.RuleDto;
 
 /**
  * @author Rodrigo Fasioli
  */
-public class TemplateBase {
+public class TemplateBase implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 	protected String description;
-	protected Rule[] rules;
-	protected String[] fragments;
-	protected List<String> tags; 
+	protected List<RuleDto> rules = new ArrayList<>();
+	protected List<String> tags = new ArrayList<>(); 
 	
+	@DBRef(lazy=true)
+	protected List<Fragment> fragments = new ArrayList<>();
+		
 	public TemplateBase() {
 		super();		
 	}
 
 	public TemplateBase(
-			String description,
-			Rule[] rules,
-			String[] fragments,
-			List<String> tags)
+			String description)
 	{
 		super();
 		this.description = description;
-		this.rules = rules;
-		this.fragments = fragments;
-		this.tags = tags;
 	}
 
 	public String getDescription() {
@@ -38,20 +40,12 @@ public class TemplateBase {
 		this.description = description;
 	}
 
-	public Rule[] getRules() {
+	public List<RuleDto> getRules() {
 		return rules;
 	}
 
-	public void setRules(Rule[] rules) {
+	public void setRules(List<RuleDto> rules) {
 		this.rules = rules;
-	}
-
-	public String[] getFragments() {
-		return fragments;
-	}
-
-	public void setFragments(String[] fragments) {
-		this.fragments = fragments;
 	}
 
 	public List<String> getTags() {
@@ -62,10 +56,18 @@ public class TemplateBase {
 		this.tags = tags;
 	}
 
+	public List<Fragment> getFragments() {
+		return fragments;
+	}
+
+	public void setFragments(List<Fragment> fragments) {
+		this.fragments = fragments;
+	}
+
 	@Override
 	public String toString() {
-		return "TemplateBase [description=" + description + ", rules=" + Arrays.toString(rules) + ", fragments="
-				+ Arrays.toString(fragments) + ", tags=" + tags + "]";
+		return "TemplateBase [description=" + description + ", rules=" + rules + ", tags=" + tags + ", fragments="
+				+ fragments + "]";
 	}
-	
+
 }
