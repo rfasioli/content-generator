@@ -18,8 +18,8 @@ public class TemplateBase implements Serializable{
 	protected List<RuleDto> rules = new ArrayList<>();
 	protected List<String> tags = new ArrayList<>(); 
 	
-	@DBRef()
-	protected List<String> fragments = new ArrayList<>();
+	@DBRef(lazy=true)
+	protected List<Fragment> fragments = new ArrayList<>();
 		
 	public TemplateBase() {
 		super();		
@@ -56,11 +56,11 @@ public class TemplateBase implements Serializable{
 		this.tags = tags;
 	}
 
-	public List<String> getFragments() {
+	public List<Fragment> getFragments() {
 		return fragments;
 	}
 
-	public void setFragments(List<String> fragments) {
+	public void setFragments(List<Fragment> fragments) {
 		this.fragments = fragments;
 	}
 
