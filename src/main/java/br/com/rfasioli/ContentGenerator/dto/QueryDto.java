@@ -1,5 +1,6 @@
 package br.com.rfasioli.ContentGenerator.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.validation.constraints.Null;
@@ -7,7 +8,9 @@ import javax.validation.constraints.Null;
 /**
  * @author Rodrigo Fasioli
  */
-public class QueryDto {
+public class QueryDto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Null
 	private String operator;
 	
@@ -22,12 +25,11 @@ public class QueryDto {
 	
 	public QueryDto(
 			String operator,
-			StatementDto statement,
-			List<?> subQueries) {
+			StatementDto statement)
+	{
 		super();
 		this.operator = operator;
 		this.statement = statement;
-		this.subQueries = subQueries;
 	}
 
 	public String getOperator() {

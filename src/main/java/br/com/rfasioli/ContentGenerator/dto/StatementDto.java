@@ -1,14 +1,18 @@
 package br.com.rfasioli.ContentGenerator.dto;
 
-import java.util.Arrays;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Rodrigo Fasioli
  */
-public class StatementDto {
+public class StatementDto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private String field;
 	private String operator;
-	private String[] values;
+	private List<String> values = new ArrayList<>();
 	
 	public StatementDto() {
 		super();		
@@ -16,12 +20,11 @@ public class StatementDto {
 	
 	public StatementDto(
 			String field,
-			String operator,
-			String[] values) {
+			String operator) 
+	{
 		super();
 		this.field = field;
 		this.operator = operator;
-		this.values = values;
 	}
 	
 	public String getField() {
@@ -39,18 +42,18 @@ public class StatementDto {
 	public void setOperator(String operator) {
 		this.operator = operator;
 	}
-	
-	public String[] getValues() {
+
+	public List<String> getValues() {
 		return values;
 	}
-	
-	public void setValues(String[] values) {
+
+	public void setValues(List<String> values) {
 		this.values = values;
 	}
 
 	@Override
 	public String toString() {
-		return "Statement [field=" + field + ", operator=" + operator + ", values=" + Arrays.toString(values) + "]";
+		return "StatementDto [field=" + field + ", operator=" + operator + ", values=" + values + "]";
 	}
-
+	
 }

@@ -1,7 +1,6 @@
 package br.com.rfasioli.ContentGenerator.service;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,9 +15,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.rfasioli.ContentGenerator.document.Fragment;
 import br.com.rfasioli.ContentGenerator.document.Template;
+import br.com.rfasioli.ContentGenerator.document.TemplateBase;
 import br.com.rfasioli.ContentGenerator.dto.QueryDto;
 import br.com.rfasioli.ContentGenerator.dto.RuleDto;
-import br.com.rfasioli.ContentGenerator.dto.TemplateBaseDto;
 import br.com.rfasioli.ContentGenerator.dto.TemplateNestedDto;
 import br.com.rfasioli.ContentGenerator.exception.MissingParameterException;
 import br.com.rfasioli.ContentGenerator.exception.PdfGenerationException;
@@ -104,7 +103,7 @@ public class ContentGeneratorService {
 	 * @param docTemplate
 	 */
 	private void processTemplate(
-			TemplateBaseDto template, 
+			TemplateBase template, 
 			String request,
 			Map<String, String> docTemplate) {
 		for (RuleDto rule : template.getRules()) {
@@ -127,7 +126,7 @@ public class ContentGeneratorService {
 		}
 		if (nested != null) {
 			for (Object object : nested) {
-				processTemplate((TemplateBaseDto)object, request, docTemplate);
+				processTemplate((TemplateBase)object, request, docTemplate);
 			}
 		}
 	}
@@ -169,7 +168,7 @@ public class ContentGeneratorService {
 	private boolean processQuery(QueryDto query, String request) {
 		String field = query.getStatement().getField();
 		String operator = query.getStatement().getOperator();
-		List<String> values = Arrays.asList(query.getStatement().getValues());
+		List<String> values = query.getStatement().getValues();
 		
 		String currentValue = getValueFromJsonString(request, field);
 		
@@ -248,7 +247,7 @@ public class ContentGeneratorService {
 	 * @param action
 	 * @param reference
 	 */
-	private void applyFragments(String[] fragmentsTags, Map<String, String> docTemplate, String action, String reference) {
+	private void applyFragments(List<String> fragmentsTags, Map<String, String> docTemplate, String action, String reference) {
 		for (String tag : fragmentsTags) {
 			logger.debug("To be, apply " + action + " fragment " + tag + " on " + reference);
 			Optional<Fragment> fragment = fragmentRepo.findById(tag);

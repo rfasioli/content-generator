@@ -1,24 +1,26 @@
 package br.com.rfasioli.ContentGenerator.dto;
 
-import java.util.Arrays;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Rodrigo Fasioli
  */
-public class RuleDto {
+public class RuleDto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private String description;
-	private QueryDto[] queries;  
+
+	private List<QueryDto> queries = new ArrayList<>();  
 
 	public RuleDto() {
 		super();		
 	}
 	
-	public RuleDto(
-			String description, 
-			QueryDto[] queries) {
+	public RuleDto(String description) {
 		super();
 		this.description = description;
-		this.queries = queries;
 	}
 	
 	public String getDescription() {
@@ -28,18 +30,13 @@ public class RuleDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public QueryDto[] getQueries() {
+
+	public List<QueryDto> getQueries() {
 		return queries;
 	}
-	
-	public void setQueries(QueryDto[] queries) {
+
+	public void setQueries(List<QueryDto> queries) {
 		this.queries = queries;
 	}
-
-	@Override
-	public String toString() {
-		return "Rule [description=" + description + ", queries=" + Arrays.toString(queries) + "]";
-	}
-
+	
 }

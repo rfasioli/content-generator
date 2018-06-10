@@ -1,19 +1,23 @@
 package br.com.rfasioli.ContentGenerator.dto;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.Null;
 
+import br.com.rfasioli.ContentGenerator.document.TemplateBase;
+
 /**
  * @author Rodrigo Fasioli
  */
-public class TemplateNestedDto extends TemplateBaseDto {
-
+public class TemplateNestedDto extends TemplateBase {
+	private static final long serialVersionUID = 1L;
+	
 	private String action;
 	private String reference;
+
 	@Null
-	private List<?> nested;
+	private List<?> nested = new ArrayList<>();
 	
 	public TemplateNestedDto() { 
 		super(); 
@@ -21,24 +25,16 @@ public class TemplateNestedDto extends TemplateBaseDto {
 
 	public TemplateNestedDto(
 			String description,
-			RuleDto[] rules,
-			String[] fragments,
 			String action,
-			String reference,
-			List<?> nested,
-			List<String> tags) {
-		super(description, rules, fragments, tags);
+			String reference)
+	{
+		super(description);
 		this.action = action;
 		this.reference = reference;
-		this.nested = nested;
 	}
 	
-	public TemplateNestedDto(
-			String description, 
-			RuleDto[] rules, 
-			String[] fragments,
-			List<String> tags) {
-		super(description, rules, fragments, tags);
+	public TemplateNestedDto(String description) {
+		super(description);
 	}
 
 	public String getAction() {
@@ -67,8 +63,10 @@ public class TemplateNestedDto extends TemplateBaseDto {
 
 	@Override
 	public String toString() {
-		return "TemplateNested [action=" + action + ", reference=" + reference + ", nested=" + nested + ", description="
-				+ description + ", rules=" + Arrays.toString(rules) + ", fragments=" + Arrays.toString(fragments) + "]";
-	}	
-	
+		return "TemplateNestedDto [action=" + action + ", reference=" + reference + ", nested=" + nested
+				+ ", description=" + description + ", rules=" + rules + ", tags=" + tags + ", fragments=" + fragments
+				+ "]";
+	}
+
 }
+ 
