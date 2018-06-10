@@ -15,11 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.rfasioli.ContentGenerator.document.Fragment;
-import br.com.rfasioli.ContentGenerator.document.Query;
-import br.com.rfasioli.ContentGenerator.document.Rule;
 import br.com.rfasioli.ContentGenerator.document.Template;
-import br.com.rfasioli.ContentGenerator.document.TemplateBase;
-import br.com.rfasioli.ContentGenerator.document.TemplateNested;
+import br.com.rfasioli.ContentGenerator.dto.QueryDto;
+import br.com.rfasioli.ContentGenerator.dto.RuleDto;
+import br.com.rfasioli.ContentGenerator.dto.TemplateBaseDto;
+import br.com.rfasioli.ContentGenerator.dto.TemplateNestedDto;
 import br.com.rfasioli.ContentGenerator.exception.MissingParameterException;
 import br.com.rfasioli.ContentGenerator.exception.PdfGenerationException;
 import br.com.rfasioli.ContentGenerator.repository.FragmentRepository;
@@ -104,13 +104,13 @@ public class ContentGeneratorService {
 	 * @param docTemplate
 	 */
 	private void processTemplate(
-			TemplateBase template, 
+			TemplateBaseDto template, 
 			String request,
 			Map<String, String> docTemplate) {
-		for (Rule rule : template.getRules()) {
+		for (RuleDto rule : template.getRules()) {
 			if (processRule(rule, request)) {
-				if (template instanceof TemplateNested) {
-					TemplateNested nested = (TemplateNested) template;
+				if (template instanceof TemplateNestedDto) {
+					TemplateNestedDto nested = (TemplateNestedDto) template;
 					applyFragments(template.getFragments(), docTemplate, nested.getAction(), nested.getReference());
 				}
 				else {
@@ -122,12 +122,12 @@ public class ContentGeneratorService {
 		List<?> nested = null;
 		if (template instanceof Template) {
 			nested = ((Template)template).getNested();
-		} else if (template instanceof TemplateNested) {
-			nested = ((TemplateNested)template).getNested();
+		} else if (template instanceof TemplateNestedDto) {
+			nested = ((TemplateNestedDto)template).getNested();
 		}
 		if (nested != null) {
 			for (Object object : nested) {
-				processTemplate((TemplateBase)object, request, docTemplate);
+				processTemplate((TemplateBaseDto)object, request, docTemplate);
 			}
 		}
 	}
@@ -139,10 +139,10 @@ public class ContentGeneratorService {
 	 * @return Regra é valida ou não
 	 */
 	private boolean processRule(
-			Rule rule, 
+			RuleDto rule, 
 			String request) {
 		boolean result = false;
-		for (Query query : rule.getQueries()) {
+		for (QueryDto query : rule.getQueries()) {
 			boolean aux_result = processQuery(query, request);
 			String operator = query.getOperator();
 			result = processLogicalOperator(operator, result, aux_result);
@@ -166,7 +166,7 @@ public class ContentGeneratorService {
 				previousResult || result);		
 	}
 	
-	private boolean processQuery(Query query, String request) {
+	private boolean processQuery(QueryDto query, String request) {
 		String field = query.getStatement().getField();
 		String operator = query.getStatement().getOperator();
 		List<String> values = Arrays.asList(query.getStatement().getValues());

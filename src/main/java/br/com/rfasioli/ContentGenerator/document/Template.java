@@ -6,16 +6,20 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import br.com.rfasioli.ContentGenerator.dto.RuleDto;
+import br.com.rfasioli.ContentGenerator.dto.TemplateBaseDto;
+import br.com.rfasioli.ContentGenerator.dto.TemplateNestedDto;
+
 /**
  * @author Rodrigo Fasioli
  */
 @Document(collection = "template")
-public class Template extends TemplateBase {
+public class Template extends TemplateBaseDto {
 
 	@Id
 	private String id;
 	
-	private List<TemplateNested> nested;
+	private List<TemplateNestedDto> nested;
 	
 	public Template() { 
 		super(); 
@@ -23,9 +27,9 @@ public class Template extends TemplateBase {
 
 	public Template(
 			String description,
-			Rule[] rules,
+			RuleDto[] rules,
 			String[] fragments,
-			List<TemplateNested> nested,
+			List<TemplateNestedDto> nested,
 			List<String> tags) {
 		super(description, rules, fragments, tags);
 		this.nested = nested;
@@ -33,7 +37,7 @@ public class Template extends TemplateBase {
 
 	public Template(
 			String description, 
-			Rule[] rules, 
+			RuleDto[] rules, 
 			String[] fragments,
 			List<String> tags) {
 		super(description, rules, fragments, tags);
@@ -47,11 +51,11 @@ public class Template extends TemplateBase {
 		this.id = id;
 	}
 	
-	public List<TemplateNested> getNested() {
+	public List<TemplateNestedDto> getNested() {
 		return nested;
 	}
 
-	public void setNested(List<TemplateNested> nested) {
+	public void setNested(List<TemplateNestedDto> nested) {
 		this.nested = nested;
 	}
 

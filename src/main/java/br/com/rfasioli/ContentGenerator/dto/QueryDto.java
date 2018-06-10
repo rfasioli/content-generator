@@ -1,4 +1,4 @@
-package br.com.rfasioli.ContentGenerator.document;
+package br.com.rfasioli.ContentGenerator.dto;
 
 import java.util.List;
 
@@ -7,22 +7,22 @@ import javax.validation.constraints.Null;
 /**
  * @author Rodrigo Fasioli
  */
-public class Query {
+public class QueryDto {
 	@Null
 	private String operator;
 	
-	private Statement statement;
+	private StatementDto statement;
 	
 	@Null
 	private List<?> subQueries;
 	
-	public Query() {
+	public QueryDto() {
 		super();
 	}
 	
-	public Query(
+	public QueryDto(
 			String operator,
-			Statement statement,
+			StatementDto statement,
 			List<?> subQueries) {
 		super();
 		this.operator = operator;
@@ -38,11 +38,11 @@ public class Query {
 		this.operator = operator;
 	}
 
-	public Statement getStatement() {
+	public StatementDto getStatement() {
 		return statement;
 	}
 
-	public void setStatement(Statement statement) {
+	public void setStatement(StatementDto statement) {
 		this.statement = statement;
 	}
 

@@ -1,20 +1,20 @@
-package br.com.rfasioli.ContentGenerator.document;
+package br.com.rfasioli.ContentGenerator.dto;
 
 import java.util.Arrays;
 
 /**
  * @author Rodrigo Fasioli
  */
-public class Statement {
+public class StatementDto {
 	private String field;
 	private String operator;
 	private String[] values;
 	
-	public Statement() {
+	public StatementDto() {
 		super();		
 	}
 	
-	public Statement(
+	public StatementDto(
 			String field,
 			String operator,
 			String[] values) {

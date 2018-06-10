@@ -1,21 +1,21 @@
-package br.com.rfasioli.ContentGenerator.document;
+package br.com.rfasioli.ContentGenerator.dto;
 
 import java.util.Arrays;
 
 /**
  * @author Rodrigo Fasioli
  */
-public class Rule {
+public class RuleDto {
 	private String description;
-	private Query[] queries;  
+	private QueryDto[] queries;  
 
-	public Rule() {
+	public RuleDto() {
 		super();		
 	}
 	
-	public Rule(
+	public RuleDto(
 			String description, 
-			Query[] queries) {
+			QueryDto[] queries) {
 		super();
 		this.description = description;
 		this.queries = queries;
@@ -29,11 +29,11 @@ public class Rule {
 		this.description = description;
 	}
 	
-	public Query[] getQueries() {
+	public QueryDto[] getQueries() {
 		return queries;
 	}
 	
-	public void setQueries(Query[] queries) {
+	public void setQueries(QueryDto[] queries) {
 		this.queries = queries;
 	}
 

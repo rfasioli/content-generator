@@ -1,4 +1,4 @@
-package br.com.rfasioli.ContentGenerator.document;
+package br.com.rfasioli.ContentGenerator.dto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,20 +8,20 @@ import javax.validation.constraints.Null;
 /**
  * @author Rodrigo Fasioli
  */
-public class TemplateNested extends TemplateBase {
+public class TemplateNestedDto extends TemplateBaseDto {
 
 	private String action;
 	private String reference;
 	@Null
 	private List<?> nested;
 	
-	public TemplateNested() { 
+	public TemplateNestedDto() { 
 		super(); 
 	}
 
-	public TemplateNested(
+	public TemplateNestedDto(
 			String description,
-			Rule[] rules,
+			RuleDto[] rules,
 			String[] fragments,
 			String action,
 			String reference,
@@ -33,9 +33,9 @@ public class TemplateNested extends TemplateBase {
 		this.nested = nested;
 	}
 	
-	public TemplateNested(
+	public TemplateNestedDto(
 			String description, 
-			Rule[] rules, 
+			RuleDto[] rules, 
 			String[] fragments,
 			List<String> tags) {
 		super(description, rules, fragments, tags);

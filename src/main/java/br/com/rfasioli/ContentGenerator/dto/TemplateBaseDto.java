@@ -1,4 +1,4 @@
-package br.com.rfasioli.ContentGenerator.document;
+package br.com.rfasioli.ContentGenerator.dto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,20 +6,21 @@ import java.util.List;
 /**
  * @author Rodrigo Fasioli
  */
-public class TemplateBase {
+public class TemplateBaseDto {
 
 	protected String description;
-	protected Rule[] rules;
+	protected List<RuleDto> rules = new ArrayList<>();
+	
 	protected String[] fragments;
 	protected List<String> tags; 
 	
-	public TemplateBase() {
+	public TemplateBaseDto() {
 		super();		
 	}
 
-	public TemplateBase(
+	public TemplateBaseDto(
 			String description,
-			Rule[] rules,
+			RuleDto[] rules,
 			String[] fragments,
 			List<String> tags)
 	{
@@ -38,11 +39,11 @@ public class TemplateBase {
 		this.description = description;
 	}
 
-	public Rule[] getRules() {
+	public RuleDto[] getRules() {
 		return rules;
 	}
 
-	public void setRules(Rule[] rules) {
+	public void setRules(RuleDto[] rules) {
 		this.rules = rules;
 	}
 
