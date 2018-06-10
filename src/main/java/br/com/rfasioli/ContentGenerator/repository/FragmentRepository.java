@@ -7,7 +7,6 @@ import br.com.rfasioli.ContentGenerator.document.Fragment;
 
 /**
  * @author rfasioli
- *
  */
 @RepositoryRestResource(collectionResourceRel = "fragment", path = "fragments")
 public interface FragmentRepository 

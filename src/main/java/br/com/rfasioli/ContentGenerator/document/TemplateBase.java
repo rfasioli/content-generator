@@ -4,8 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author rfasioli
- *
+ * @author Rodrigo Fasioli
  */
 public class TemplateBase {
 

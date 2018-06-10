@@ -7,8 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * @author rfasioli
- *
+ * @author Rodrigo Fasioli
  */
 @Document(collection = "template")
 public class Template extends TemplateBase {

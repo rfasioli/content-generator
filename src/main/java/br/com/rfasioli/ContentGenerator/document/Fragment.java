@@ -7,9 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 /***
  * Represent a fragment of content
- * 
- * @author rodrigofasioli
- *
+ * @author Rodrigo Fasioli
  */
 @Document(collection = "fragment")
 public class Fragment {

@@ -1,5 +1,6 @@
 package br.com.rfasioli.ContentGenerator.service;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,6 +19,8 @@ import br.com.rfasioli.ContentGenerator.document.Rule;
 import br.com.rfasioli.ContentGenerator.document.Template;
 import br.com.rfasioli.ContentGenerator.document.TemplateBase;
 import br.com.rfasioli.ContentGenerator.document.TemplateNested;
+import br.com.rfasioli.ContentGenerator.exception.MissingParameterException;
+import br.com.rfasioli.ContentGenerator.exception.PdfGenerationException;
 import br.com.rfasioli.ContentGenerator.repository.FragmentRepository;
 import br.com.rfasioli.ContentGenerator.repository.TemplateRepository;
 import br.com.rfasioli.ContentGenerator.service.processor.DocumentProcessor;
@@ -26,7 +29,7 @@ import br.com.rfasioli.ContentGenerator.service.processor.nested.NestedCommander
 import br.com.rfasioli.ContentGenerator.util.pdfGenerator;
 
 /**
- * @author rfasioli
+ * @author rodrigo fasioli
  *
  */
 @Service
@@ -41,51 +44,54 @@ public class ContentGeneratorService {
 	private FragmentRepository fragmentRepo;
 	
 	/**
-	 * Gera relatório
-	 * @param request dados da requisição para gerar o relatório
-	 * @return
+	 * Gera conteúdo conforme a requisição associada à parametrização. 
+	 * @param source dados da requisição para gerar o relatório
+	 * @return Conteúdo obtido.
+	 * @throws MissingParameterException 
 	 */
-	public String generateReport(String request) {
+	public String generateContent(String source) throws MissingParameterException {
 		Map<String, String> docTemplate = new LinkedHashMap<>();
 		Iterable<Template> templates = null;
 
 		String result = null;
 		
-		try {
-			templates = templateRepo.findByRulesQueriesStatementFieldAndRulesQueriesStatementOperatorAndRulesQueriesStatementValues
-							("reportId", "eq", getValueFromJsonString(request, "reportId"));
+		templates = templateRepo.findByRulesQueriesStatementFieldAndRulesQueriesStatementOperatorAndRulesQueriesStatementValues
+						("reportId", "eq", getValueFromJsonString(source, "reportId"));
 
-			for (Template template : templates) {
-				processTemplate(template, request, docTemplate);
-			}
-		
-			DocumentProcessor documentProcessor = new DocumentProcessor(new JSONObject(request), this.buildStringFromMap(docTemplate));
-			result = documentProcessor.process();
+		for (Template template : templates) {
+			processTemplate(template, source, docTemplate);
 		}
-		catch (Exception ex) {
-			logger.error("generateReport ", ex);
+	
+		try {
+			DocumentProcessor documentProcessor = new DocumentProcessor(new JSONObject(source), this.buildStringFromMap(docTemplate));
+			result = documentProcessor.process();
+		} catch (JSONException ex) {
+			throw new MissingParameterException("Source parameter not a JSON String.", ex);
 		}
 		
 		return result;
 	}
 	
-	public byte[] generatePdfReport(String request) {
+	/**
+	 * Gera conteúdo conforme a requisição associada à parametrização. 
+	 * @param source dados da requisição para gerar o relatório
+	 * @return Arquivo pdf em base64 com o conteúdo obtido.
+	 * @throws MissingParameterException
+	 * @throws IOException
+	 * @throws PdfGenerationException
+	 */
+	public byte[] generatePdfReport(String source) throws MissingParameterException, IOException, PdfGenerationException {
 		byte[] result = null;
 		String xHtmlDocument = "";
 		
-		try {
-			xHtmlDocument = 
-					"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">" + 
-					"<html xmlns=\"http://www.w3.org/1999/xhtml\">" +
-						"<body>" +
-							generateReport(request) +
-						"</body>" +
-					"</html>";
-			result = pdfGenerator.fromXHtmlContentToBase64(xHtmlDocument);
-		} catch (Throwable ex) {
-			logger.error("generatePdfReport ", ex);
-			result = null;
-		}
+		xHtmlDocument = 
+				"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">" + 
+				"<html xmlns=\"http://www.w3.org/1999/xhtml\">" +
+					"<body>" +
+						generateContent(source) +
+					"</body>" +
+				"</html>";
+		result = pdfGenerator.fromXHtmlContentToBase64(xHtmlDocument);
 		
 		return result;
 	}

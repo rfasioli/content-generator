@@ -4,6 +4,9 @@ import br.com.rfasioli.ContentGenerator.service.processor.nested.impl.AddAfterNe
 import br.com.rfasioli.ContentGenerator.service.processor.nested.impl.AppendNestedCommanderImpl;
 import br.com.rfasioli.ContentGenerator.service.processor.nested.impl.ReplaceNestedCommanderImpl;
 
+/**
+ * @author rodrigo fasioli
+ */
 public class NestedCommanderFactory {
 	public static NestedCommander getNestedCommander(String action) {
 		NestedCommander obj = null;

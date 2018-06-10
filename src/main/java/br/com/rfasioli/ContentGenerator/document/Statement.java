@@ -3,8 +3,7 @@ package br.com.rfasioli.ContentGenerator.document;
 import java.util.Arrays;
 
 /**
- * @author rfasioli
- *
+ * @author Rodrigo Fasioli
  */
 public class Statement {
 	private String field;

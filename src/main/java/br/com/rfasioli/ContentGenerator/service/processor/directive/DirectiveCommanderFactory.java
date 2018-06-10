@@ -3,6 +3,9 @@ package br.com.rfasioli.ContentGenerator.service.processor.directive;
 import br.com.rfasioli.ContentGenerator.service.processor.directive.impl.IfDirectiveCommanderImpl;
 import br.com.rfasioli.ContentGenerator.service.processor.directive.impl.LoopDirectiveCommanderImpl;
 
+/**
+ * @author rodrigo fasioli
+ */
 public class DirectiveCommanderFactory {
 	public static DirectiveCommander getDirectiveCommander(String directive) {
 		DirectiveCommander obj = null;
