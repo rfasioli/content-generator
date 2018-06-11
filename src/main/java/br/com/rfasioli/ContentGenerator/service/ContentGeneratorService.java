@@ -58,7 +58,8 @@ public class ContentGeneratorService {
 		}
 	
 		try {
-			DocumentProcessor documentProcessor = new DocumentProcessor(new JSONObject(source), this.buildStringFromMap(docTemplate));
+			DocumentProcessor documentProcessor = new DocumentProcessor(
+					new JSONObject(source), this.buildStringFromMap(docTemplate));
 			result = documentProcessor.process();
 		} catch (JSONException ex) {
 			throw new MissingParameterException("Source parameter not a JSON String.", ex);
