@@ -100,15 +100,20 @@ public class ContentGeneratorService {
 	private void processTemplate(
 			TemplateBase template, 
 			String request,
-			Map<String, String> docTemplate) {
+			Map<String, String> docTemplate) 
+	{
 		for (RuleDto rule : template.getRules()) {
 			if (processRule(rule, request)) {
 				if (template instanceof TemplateNestedDto) {
 					TemplateNestedDto nested = (TemplateNestedDto) template;
-					applyFragments(template.getFragments(), docTemplate, nested.getAction(), nested.getReference());
+					template.getFragments().stream().forEach(
+							fragment -> applyFragment(
+									fragment, docTemplate, nested.getAction(), nested.getReference()));
 				}
 				else {
-					applyFragments(template.getFragments(), docTemplate, null, null);
+					template.getFragments().stream().forEach(
+							fragment -> applyFragment(
+									fragment, docTemplate, null, null));
 				}
 			}
 		}
@@ -234,26 +239,7 @@ public class ContentGeneratorService {
 		}        	
 	    return value;
 	}
-	
-
-	/**
-	 * @param fragmentsTags
-	 * @param docTemplate
-	 * @param action
-	 * @param reference
-	 */
-	private void applyFragments(List<Fragment> fragments, Map<String, String> docTemplate, String action, String reference) {
-		fragments.stream().allMatch(fragment -> applyFragment(fragment, docTemplate, action, reference));
 		
-//		for (Fragment fragment : fragments) {
-//			logger.debug("To be, apply " + action + " fragment " + fragment.getDescription() + " on " + reference);
-//			NestedCommander commander = NestedCommanderFactory.getNestedCommander(action);
-//			if (commander != null) {
-//				commander.execute(fragment, docTemplate, reference);
-//			}
-//		}
-	}
-	
 	/**
 	 * @param fragment
 	 * @param docTemplate
